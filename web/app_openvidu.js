@@ -1,10 +1,13 @@
+import $ from 'jquery';
+import { OpenVidu } from 'openvidu-browser';
+
 var OV;
 var session;
 
 
 /* OPENVIDU METHODS */
 
-function joinSession() {
+export function joinSession() {
 
 	var mySessionId = document.getElementById("sessionId").value;
 	var myUserName = document.getElementById("userName").value;
@@ -95,7 +98,7 @@ function joinSession() {
 	});
 }
 
-function leaveSession() {
+export function leaveSession() {
 
 	// --- 9) Leave the session by calling 'disconnect' method over the Session object ---
 

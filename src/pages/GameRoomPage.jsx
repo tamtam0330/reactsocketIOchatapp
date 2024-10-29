@@ -1,3 +1,4 @@
+import { joinSession, leaveSession } from '../../web/app_openvidu.js';
 import { useLocation} from 'react-router-dom';
 
 const GameRoomPage = () => {
@@ -35,18 +36,21 @@ const GameRoomPage = () => {
           </div>
           <div id="join-dialog" className="jumbotron vertical-center">
             <h1>Join a video session</h1>
-            <form className="form-group" onSubmit={() => { joinSession(); return false; }}>
-              <p>
+            <form className="form-group" onSubmit={(e) => { 
+        e.preventDefault();  // 기본 제출 동작 방지
+        joinSession(); 
+      }}>
+            <p>
                 <label>Participant</label>
-                <input className="form-control" type="text" id="userName" required />
-              </p>
-              <p>
+                <input className="form-control" type="text" id="userName" required defaultValue={username} />
+            </p>
+            <p>
                 <label>Session</label>
-                <input className="form-control" type="text" id="sessionId" required />
-              </p>
-              <p className="text-center">
+                <input className="form-control" type="text" id="sessionId" required defaultValue={roomcode} />
+            </p>
+            <p className="text-center">
                 <input className="btn btn-lg btn-success" type="submit" name="commit" value="Join!" />
-              </p>
+            </p>
             </form>
           </div>
         </div>
@@ -57,7 +61,7 @@ const GameRoomPage = () => {
             <input className="btn btn-large btn-danger" 
               type="button" 
               id="buttonLeaveSession" 
-              onMouseUp={() => leaveSession()}
+              onClick={() => leaveSession()}
               value="Leave session" />
           </div>
           <div id="main-video" className="col-md-6">
